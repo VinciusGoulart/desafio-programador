@@ -1,4 +1,3 @@
-import fs from "fs-extra";
 import { parseTimeCard } from "../parsers/timeCardParser.js";
 import { writeTimecardXlsx } from "../services/spreadsheetService.js";
 
@@ -13,9 +12,6 @@ if (!pdfPath) {
 (async () => {
     try {
         const data = await parseTimeCard(pdfPath);
-
-        // (opcional) também salvar JSON para depuração
-        // await fs.writeJson("output-timecard.json", data, { spaces: 2 });
 
         await writeTimecardXlsx(data, outputXlsx);
 
