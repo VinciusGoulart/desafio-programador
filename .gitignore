@@ -12,6 +12,7 @@ resultado.*
 *.xlsx
 *.xls
 *.ods
+.ocr_cache/*
 
 # Dependências
 node_modules/

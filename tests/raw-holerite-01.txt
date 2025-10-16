@@ -1,0 +1,29 @@
+0020   Horas   Normais   167,00   587,84 
+0060   Desc.   Semanal Remunerado   45,66   160,72 
+1000   Auxílio   Doença   9,00   31,68 
+1510   Integração Médias   D.S.R.   7,35   25,87 
+1550   Horas   Extras 100%   14,66   103,21 
+1554   Hs.Extras   100%   Dom/Fer   29,26   205,99 
+/314   INSS - Remuneração   8,00   89,22 
+5260   Energia   Elétrica   18,66 
+5270   Mensalid.   BarracredCosan   10,00 
+5280   Financiam. BarracredCosan   132,78 
+5360   Promoção Páscoa   12,83 
+5378   Refeição IND   11,00   4,73 
+5393   Seguro de   Vida   Zanin   5,34 
+5430   Convênio Farmácia   51,26 
+5716   Sta   Casa de   NSRA.Benefic.   38,12 
+M502   Contribuição Confederat.   7,74 
+M503   Mensalidade   Sindical   14,00  
+P R O V E N T O S   D E S C O N T O S Código   Descrição   Qtde.   Valor   Qtde.   Valor  
+T   O   T   A   L   . .   . . .   . . . .   . . .   .   . . .   .   .   1.115,31   384,68  
+13. Salário Antecipado em Férias   Saldo Devedor   Base Cálculo INSS   Líquido a Receber  
+0,00   0,00   1.115,31   730,63  
+Base Cálculo IRRF   Base Cálculo FGTS   FGTS a ser Depositado   % Direito PPR Acumulado %   Rateio  
+861,53   1.115,31   89,22  
+BARRACRED COSAN Saldo Capital   Limite Crédito   Informações  Mensagens  Mês/Ano:  06/2012 Fls.: 338
+
+
+
+0020   Horas   Normais   174,33   657,22 0060   Desc.   Semanal Remunerado   38,33   144,50 0043   Dif.Reaj.Salário Mai   64,32 0044   Dif.Reaj.Salário Jun   78,07 1000   Auxílio   Doença   9,00   33,93 1510   Integração Médias   D.S.R.   5,38   20,28 1550   Horas   Extras 100%   14,66   110,54 1554   Hs.Extras   100%   Dom/Fer   21,99   165,80 /314   INSS - Remuneração   9,00   114,72 5020   Adiantamento Salarial   142,39 5260   Energia   Elétrica   16,32 5270   Mensalid.   BarracredCosan   10,00 5280   Financiam. BarracredCosan   154,12 5360   Promoção Páscoa   12,83 5378   Refeição IND   24,00   11,04 5393   Seguro de   Vida   Zanin   5,72 5430   Convênio Farmácia   10,10 5716   Sta   Casa de   NSRA.Benefic.   81,32 M502   Contribuição Confederat.   8,29 M503   Mensalidade   Sindical   14,00  P R O V E N T O S   D E S C O N T O S Código   Descrição   Qtde.   Valor   Qtde.   Valor  T   O   T   A   L   . .   . . .   . . . .   . . .   .   . . .   .   .   1.274,66   580,85  13. Salário Antecipado em Férias   Saldo Devedor   Base Cálculo INSS   Líquido a Receber  0,00   0,00   1.274,66   693,81  Base Cálculo IRRF   Base Cálculo FGTS   FGTS a ser Depositado   % Direito PPR Acumulado %   Rateio  995,38   1.274,66   101,97  BARRACRED COSAN Saldo Capital   Limite Crédito   Informações  Mensagens  Mês/Ano:  07/2012 Fls.: 339
+0020   Horas   Normais   175,00   659,75 0060   Desc.   Semanal Remunerado   38,33   144,50 1000   Auxílio   Doença   9,00   33,93 1510   Integração Médias   D.S.R.   4,16   15,68 1540   Horas   Extras 70%   22,01   141,06 1554   Hs.Extras   100%   Dom/Fer   21,99   165,80 M200   Pagamento   de PIS   622,00 /314   INSS - Remuneração   8,00   92,86 5260   Energia   Elétrica   16,26 5270   Mensalid.   BarracredCosan   10,00 5280   Financiam. BarracredCosan   154,12 5378   Refeição IND   18,00   8,28 5393   Seguro de   Vida   Zanin   5,72 5430   Convênio Farmácia   84,50 5716   Sta   Casa de   NSRA.Benefic.   42,92 M502   Contribuição Confederat.   8,29 M503   Mensalidade   Sindical   14,00  P R O V E N T O S   D E S C O N T O S Código   Descrição   Qtde.   Valor   Qtde.   Valor  T   O   T   A   L   . .   . . .   . . . .   . . .   .   . . .   .   .   1.782,72   436,95  13. Salário Antecipado em Férias   Saldo Devedor   Base Cálculo INSS   Líquido a Receber  0,00   0,00   1.160,72   1.345,77  Base Cálculo IRRF   Base Cálculo FGTS   FGTS a ser Depositado   % Direito PPR Acumulado %   Rateio  903,30   1.160,72   92,86  BARRACRED COSAN Saldo Capital   Limite Crédito   Informações  Mensagens  Mês/Ano:  08/2012 Fls.: 341
