@@ -2,7 +2,7 @@ import { parseTimeCard } from "../parsers/timeCardParser.js";
 import { writeTimecardXlsx } from "../services/spreadsheetService.js";
 
 const [, , pdfPath, outPathArg] = process.argv;
-const outputXlsx = outPathArg || "cartao_ponto_transcrito.xlsx";
+const outputXlsx = outPathArg || "src/outputs/cartao_ponto_transcrito.xlsx";
 
 if (!pdfPath) {
     console.error("Uso: node src/cli/parse-time-card.js <arquivo.pdf> [saida.xlsx]");
@@ -12,7 +12,6 @@ if (!pdfPath) {
 (async () => {
     try {
         const data = await parseTimeCard(pdfPath);
-
         await writeTimecardXlsx(data, outputXlsx);
 
         console.log("Planilha gerada:", outputXlsx);
