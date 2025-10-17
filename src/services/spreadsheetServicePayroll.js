@@ -37,25 +37,34 @@ function canonicalizeBaseKey(key) {
   let code = m[1].toUpperCase();
   let desc = m[2];
 
-  // Corrige código com letra O virando 0 quando houver dígitos (ex.: O101 -> 0101)
+  // Corrige código com letra O virando 0 quando houver dígitos
   if (/\d/.test(code)) code = code.replace(/O/g, "0");
 
-  // Compacta múltiplos zeros comuns em OCR de códigos do tipo /B002 -> /B02 (opcional, seguro caso específico)
+  // /B002 -> /B02 (caso específico que vimos no OCR)
   code = code.replace(/^\/B0+2$/i, "/B02");
 
-  // Normaliza a descrição:
+  // remove eco do código no começo da descrição: "/BO02", "BO02", "/B002", "/B0O2", etc
+  const codeBare = code.replace(/^\//, ""); // ex: "/B02" -> "B02"
   desc = desc
-    .replace(/^[\/\\]+/, "")       // remove "/" no início
-    .replace(/\s*\/\s*/g, "/")     // "/ DSR" -> "/DSR"
-    .replace(/\s{2,}/g, " ")       // espaços múltiplos
-    .replace(/^\//, "")            // "/" sobrando
+    // 1) exatamente o code bare
+    .replace(new RegExp(`^\\/?\\s*${codeBare}\\b\\s*`, "i"), "")
+    // 2) variantes da família B02 (BO02, B002, B0O2...)
+    .replace(/^\/?\s*B[0O]+2\b\s*/i, "")
+    // 3) fallback genérico: eco de código no início (1–2 letras + 2–5 dígitos)
+    .replace(/^[A-Z]{1,2}\d{2,5}\b\s*/, "");
+
+  // Normaliza a descrição
+  desc = desc
+    .replace(/^[\/\\]+/, "")      // remove "/" residual no início
+    .replace(/\s*\/\s*/g, "/")    // "/ DSR" -> "/DSR"
+    .replace(/\s{2,}/g, " ")      // espaços múltiplos
+    .replace(/^\//, "")           // "/" sobrando
     .trim();
 
-  // Alguns ruídos comuns:
+  // Ruídos comuns
   desc = desc.replace(/^\/?Assist\s+/i, s => s.replace("/", "")); // "/Assist" -> "Assist"
-  desc = desc.replace(/^I\/I?DSR\b/i, "DSR"); // "I/IDSR" -> "DSR" (se você preferir manter, remova esta linha)
+  desc = desc.replace(/^I\/I?DSR\b/i, "DSR"); // "I/IDSR" -> "DSR"
 
-  // Remonta
   const base = `(${code}) ${desc}`;
   return retroSuffix ? `${base}${retroSuffix}` : base;
 }
@@ -123,13 +132,15 @@ export async function writePayrollPivotXlsx(months, outputPath) {
   for (const k of orderedKeys) {
     const m = meta.get(k);
     if (!m) continue;
+
     if (m.valueOnly || !m.hasQtdAny) {
-      // só VALOR
-      const colName = `${k} VALOR`;
+      // se a chave já termina com " VALOR", não adicione de novo
+      const alreadyHasValor = /\bVALOR$/i.test(k);
+      const colName = alreadyHasValor ? k : `${k} VALOR`;
+
       colIndex.set(`${k}::VALOR`, header.length);
       header.push(colName);
     } else {
-      // par QTD/VALOR
       const qCol = `${k} QUANTIDADE`;
       const vCol = `${k} VALOR`;
       colIndex.set(`${k}::QTD`, header.length);

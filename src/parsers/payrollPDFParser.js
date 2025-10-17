@@ -1,4 +1,3 @@
-// src/parsers/payrollParser.js
 import { extractTextFromPDF } from "../utils/pdfutils.js";
 
 const NUM_RE_G = /-?\d{1,3}(?:\.\d{3})*,\d{2}/g;

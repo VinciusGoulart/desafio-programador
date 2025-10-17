@@ -158,7 +158,7 @@ function splitByPeriodsSmart(raw) {
   }
 
   return blocks
-    .filter(b => b.lines.length)
+    .filter(b => b.lines.length && b.mes && b.ano) // <-- descarta blocos sem período
     .map(b => ({ mes: b.mes || "", ano: b.ano || "", chunk: normSpace(b.lines.join("\n")) }));
 }
 

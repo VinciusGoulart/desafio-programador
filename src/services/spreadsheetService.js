@@ -55,7 +55,7 @@ export function recordToRow(rec) {
     }
 
     // Pairing: [E1,S1,E2,S2, ...]
-    const MAX_PAIRS = 6;
+    const MAX_PAIRS = 4;
     const pairs = [];
     for (let i = 0; i < MAX_PAIRS; i++) {
         const e = stamps[i * 2] ?? "";
@@ -96,8 +96,6 @@ export const HEADER = [
     "Entrada2", "Saída2",
     "Entrada3", "Saída3",
     "Entrada4", "Saída4",
-    "Entrada5", "Saída5",
-    "Entrada6", "Saída6",
     "HE Diurno",
     "HE Noturno",
     "ATN",

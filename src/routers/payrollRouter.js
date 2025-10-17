@@ -1,5 +1,5 @@
 import { parsePayrollOCR } from "../parsers/payrollOCRParser.js";
-import { parsePayrollPDF } from "../parsers/payrollParser.js";
+import { parsePayrollPDF } from "../parsers/payrollPDFParser.js";
 import { extractTextFromPDF } from "../utils/pdfutils.js";
 
 function looksLikeType2(rawText) {

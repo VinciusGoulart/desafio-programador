@@ -1,4 +1,3 @@
-import fs from "fs-extra";
 import { writePayrollPivotXlsx } from "../services/spreadsheetServicePayroll.js";
 import { parsePayrollAuto } from "../routers/payrollRouter.js";
 
@@ -13,7 +12,6 @@ if (!pdfPath) {
 (async () => {
     try {
         const months = await parsePayrollAuto(pdfPath);
-        // await fs.writeJson("output-holerite.json", months, { spaces: 2 });
         await writePayrollPivotXlsx(months, outputXlsx);
         console.log("Planilha gerada:", outputXlsx);
     } catch (err) {
