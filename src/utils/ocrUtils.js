@@ -83,7 +83,7 @@ async function preprocess(imgPath) {
 /* ------------------------------------------------------------------ */
 export async function ocrPdfToText(
   pdfPath,
-  { dpi = 300, lang = "por_fast+eng_fast" } = {}
+  { dpi = 300, lang = "por" } = {}
 ) {
   const outDir = path.join(process.cwd(), ".ocr_cache");
   const pngs = await pdfToPngsWithPoppler(pdfPath, { dpi, outDir });
