@@ -2,7 +2,6 @@ import * as XLSX from "xlsx";
 import fs from "fs-extra";
 import path from "path";
 
-
 /** regex "HH:MM - HH:MM" */
 const RANGE_RE = /^\s*(\d{2}:\d{2})\s*-\s*(\d{2}:\d{2})\s*$/;
 
@@ -13,9 +12,21 @@ function parseRange(rangeStr = "") {
     return [m[1], m[2]];
 }
 
-/** 
- * Converte um registro do parser (um dia) para um array:
- * [Data, E1, S1, E2, S2, ..., E6, S6]
+/** parse número pt-BR "0,2" -> 0.2 (ou retorna "" se vazio/não numérico) */
+function parsePtBrNumber(s) {
+    if (s == null) return "";
+    const t = String(s).trim();
+    if (!t) return "";
+    // mantém o marcador especial "(*)" como está
+    if (t === "(*)") return t;
+    // "-0,5" -> -0.5 ; "0,2" -> 0.2
+    const num = Number(t.replace(/\./g, "").replace(",", "."));
+    return Number.isFinite(num) ? num : t;
+}
+
+/**
+ * Converte um registro do parser (um dia) para uma linha:
+ * [Data, E1,S1,E2,S2,E3,S3,E4,S4,E5,S5,E6,S6, HE Diurno, HE Noturno, ATN, Func, Situac, Insalub, Conc, DiaSemana, Obs]
  */
 export function recordToRow(rec) {
     const data = rec.Dia; // dd/mm/yyyy
@@ -28,15 +39,14 @@ export function recordToRow(rec) {
     // Monta sequência cronológica de batidas
     // start, [iv1.start, iv1.end], [iv2...], [iv3...], end
     const stamps = [];
-
     if (main) {
         const [start, end] = main;
         stamps.push(start);
 
-        [iv1, iv2, iv3].forEach(iv => {
+        [iv1, iv2, iv3].forEach((iv) => {
             if (iv) {
-                stamps.push(iv[0]); 
-                stamps.push(iv[1]); 
+                stamps.push(iv[0]);
+                stamps.push(iv[1]);
             }
         });
 
@@ -45,7 +55,6 @@ export function recordToRow(rec) {
     }
 
     // Pairing: [E1,S1,E2,S2, ...]
-    // Se não houver expediente (ex.: descanso/feriado), mantemos só a data com colunas vazias
     const MAX_PAIRS = 6;
     const pairs = [];
     for (let i = 0; i < MAX_PAIRS; i++) {
@@ -54,10 +63,33 @@ export function recordToRow(rec) {
         pairs.push(e, s);
     }
 
-    return [data, ...pairs];
+    // Campos adicionais (meta)
+    const heDiurno = parsePtBrNumber(rec["HE Diurno"]);
+    const heNoturno = parsePtBrNumber(rec["HE Noturno"]);
+    const atn = rec.ATN || "";
+    const func = rec["Func"] || "";
+    const situac = rec["Situac"] || "";
+    const insalub = rec["Insalub"] || "";
+    const conc = rec["Conc"] || "";
+    const diaSemana = rec["_DiaSemana"] || "";
+    const obs = rec["_Obs"] || "";
+
+    return [
+        data,
+        ...pairs,
+        heDiurno,
+        heNoturno,
+        atn,
+        func,
+        situac,
+        insalub,
+        conc,
+        diaSemana,
+        obs,
+    ];
 }
 
-/** Cabeçalho exigido */
+/** Cabeçalho exigido + colunas adicionais */
 export const HEADER = [
     "Data",
     "Entrada1", "Saída1",
@@ -66,6 +98,15 @@ export const HEADER = [
     "Entrada4", "Saída4",
     "Entrada5", "Saída5",
     "Entrada6", "Saída6",
+    "HE Diurno",
+    "HE Noturno",
+    "ATN",
+    "Func",
+    "Situac",
+    "Insalub",
+    "Conc",
+    "DiaSemana",
+    "Obs",
 ];
 
 /** Escreve XLSX com as linhas */
@@ -79,7 +120,6 @@ export async function writeTimecardXlsx(records, outputPath) {
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "CartaoPonto");
 
-    // Cria diretório destino (se necessário) e salva
     await fs.ensureDir(path.dirname(outputPath));
     XLSX.writeFile(wb, outputPath, { bookType: "xlsx" });
 }

@@ -168,7 +168,7 @@ function extractFooterValues(chunk) {
  * - items: [{ baseKey="(code) desc", quantidade, valor }]
  * - footers: { "13º Salário Antecipado em Férias": number|null, ... }
  */
-export async function parsePayroll(pdfPath) {
+export async function parsePayrollPDF(pdfPath) {
   const raw = await extractTextFromPDF(pdfPath);
   const periods = splitByPeriods(raw);
   const months = [];
