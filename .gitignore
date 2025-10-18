@@ -1,15 +1,9 @@
 # Arquivos de teste (serão fornecidos separadamente)
-*.pdf
 modelo_planilha.*
 modelo.*
 
 # Arquivos de saída (podem ser recriados)
-output/*.xlsx
-output/*.xls
-output/*.ods
-output/*.csv
 resultado.*
-*.xlsx
 *.xls
 *.ods
 .ocr_cache/*
